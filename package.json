@@ -1,0 +1,23 @@
+{
+  "name": "shri-2018__media_01",
+  "version": "1.0.0",
+  "description": "video and audio flow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web",
+    "audio",
+    "api",
+    "video",
+    "audio",
+    "canvas"
+  ],
+  "author": "belodpav",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.18.2",
+    "eslint-config-loris": "^9.1.0"
+  }
+}
