@@ -1,12 +1,19 @@
+## Live версия
+
+[Терминатор screen](https://belodpav.github.io/shri-2018__homework_task_03/)
+
 ## Установка и использование
 
 Установка:
+
   `npm install`
   
 Запуск dev сборки:
+
 `npm start`
 
 Запуск production сборки:
+
 `npm run build`
 
 ## Файловая структура проекта
