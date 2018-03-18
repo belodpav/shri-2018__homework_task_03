@@ -6,7 +6,7 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'index.js'
+        filename: 'index.min.js'
     },
     watch: true,
     devServer: {
@@ -37,6 +37,6 @@ module.exports = merge(common, {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('index.css')
+        new ExtractTextPlugin('index.min.css')
     ]
 });

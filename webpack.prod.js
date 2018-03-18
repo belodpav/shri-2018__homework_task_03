@@ -7,7 +7,7 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
     output: {
         path: path.resolve(__dirname, 'docs'),
-        filename: 'index.js'
+        filename: 'index.min.js'
     },
     devtool: 'source-map',
     module: {
@@ -34,7 +34,7 @@ module.exports = merge(common, {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('index.css'),
+        new ExtractTextPlugin('index.min.css'),
         new UglifyJsPlugin({
             sourceMap: true
         })
