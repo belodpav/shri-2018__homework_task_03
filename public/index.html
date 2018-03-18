@@ -5,8 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Video and Audio flow</title>
+  <link rel="stylesheet" href="index.css">
 </head>
-<body>
+<body class="page">
+  <div class="app">
+    <div class="app__i">
+      <div class="app__i-text"></div>
+      <div class="app__i-volume"></div>
+      <div class="app__i-diagram"></div>
+    </div> 
+    <video style="display:none;" class="app__video" autoplay></video>
+    <canvas class="app__canvas app__canvas_contrast_200"></canvas>
+  </div>
   <script src="index.js"></script>
 </body>
 </html>
