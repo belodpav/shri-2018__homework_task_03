@@ -1,6 +1,11 @@
 /* Block: page */
 .page {
+    height: 100vh;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
 }
 /* Block: app */
 .app {
