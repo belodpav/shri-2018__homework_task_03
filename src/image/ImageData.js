@@ -2,7 +2,11 @@ import {swapLinesRandom} from './image';
 /**
  * @class
  * Класс обертки над объектом ImageData
- * контекста элемента canvas
+ * контекста элемента canvas.
+ * К экземплярам настоящего класса можно
+ * применять различные фильтры используя
+ * chaining запись.
+ * Например: newImage.brightness(50).noise().shake(5)
  */
 class ImageData {
     /**
@@ -19,31 +23,49 @@ class ImageData {
         return this._data;
     }
 
+    /**
+     * @method
+     * Возвращает сгенерированное shake()
+     * смещение по оси X
+     * @returns {Number}
+     */
+    getX() {
+        return this._x;
+    }
+
+    /**
+     * @method
+     * Возвращает сгенерированное shake()
+     * смещение по оси Y
+     * @returns {Number}
+     */
+    getY() {
+        return this._y;
+    }
+
+    /**
+     * @method
+     * Настраивает красный канал изображения
+     * со значением rVal
+     * @param {Number} rVal - значение от 0 до 255
+     * @returns {ImageData}
+     */
     red(rVal) {
         const matrix = this._data.data;
 
         for (let i = 0; i < matrix.length; i += 4) {
-            matrix[i] = rVal;
+            matrix[i] = this._truncate(rVal);
         }
         return this;
     }
 
-    gamma(gamma) {
-        const matrix = this._data.data;
-        const gammaCorrection = 1 / gamma;
-
-        for (let i = 0; i < matrix.length; i += 4) {
-            const r = matrix[i];
-            const g = matrix[i + 1];
-            const b = matrix[i + 2];
-
-            matrix[i] = 255 * (r / 255) ^ gammaCorrection;
-            matrix[i + 1] = 255 * (b / 255) ^ gammaCorrection;
-            matrix[i + 2] = 255 * (g / 255) ^ gammaCorrection;
-        }
-        return this;
-    }
-
+    /**
+     * @method
+     * Настраивает яркость изображения
+     * со значением val
+     * @param {Number} val - значение от -255 до 255
+     * @returns {ImageData}
+     */
     brightness(val) {
         const matrix = this._data.data;
         const truncate = this._truncate;
@@ -61,6 +83,11 @@ class ImageData {
         return this;
     }
 
+    /**
+     * @method
+     * Gray Average фильтр изображения
+     * @returns {ImageData}
+     */
     grayAverage() {
         const matrix = this._data.data;
         let gray = 0;
@@ -79,6 +106,13 @@ class ImageData {
         return this;
     }
 
+    /**
+     * @method
+     * Настраивает контрастность изображения
+     * со значением val
+     * @param {Number} val - значение от -255 до 255
+     * @returns {ImageData}
+     */
     setContrast(contrast) {
         const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
         const matrix = this._data.data;
@@ -94,6 +128,13 @@ class ImageData {
         return this;
     }
 
+    /**
+     * @method
+     * Добавляет легкого линейного шума изображению.
+     * Чем больше коэфициент k тем больше шума
+     * @param {Number} k - значение от 0 до 1
+     * @returns {ImageData}
+     */
     noiseLight(k) {
         let imageData = this._data;
 
@@ -107,6 +148,11 @@ class ImageData {
         return this;
     }
 
+    /**
+     * @method
+     * Добавляет средний линейный шум изображению.
+     * @returns {ImageData}
+     */
     noise() {
         let imageData = this._data;
 
@@ -117,19 +163,18 @@ class ImageData {
         return this;
     }
 
+    /**
+     * @method
+     * Добавляет эффект "тряски" изображению.
+     * Амплитуда смещения определяется значением amplitude
+     * @param {Number} amplitude - значение > 0
+     * @returns {ImageData}
+     */
     shake(amplitude) {
         this._x = Math.floor(Math.random() * 2 * amplitude - amplitude);
         this._y = Math.floor(Math.random() * 2 * amplitude - amplitude);
 
         return this;
-    }
-
-    getX() {
-        return this._x;
-    }
-
-    getY() {
-        return this._y;
     }
 
     // Private methods
